@@ -26,7 +26,9 @@ def iniciar_sesion():
         
 def registrar_cliente():
     while True:
-        correo = input("Ingrese un email para registrarse: ")
+        correo = input("Ingrese un email para registrarse (0 para cancelar): ")
+        if correo == "0":
+            return
         mails_repetidos = []
         for usuario in USUARIOS:
             if correo == usuario['email']:

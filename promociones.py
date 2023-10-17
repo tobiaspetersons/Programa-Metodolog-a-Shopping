@@ -261,10 +261,10 @@ def usar_promociones_cliente():
         if i == 1:
             print("No hay promociones disponibles en el día de hoy para este local.")
         else:
-            promocion = input("Ingrese el número de promoción que desea aplicar a su compra: ")
+            promocion = int(input("Ingrese el número de promoción que desea aplicar a su compra: "))
             for promo in promociones_disponibles:
                 if promocion == promo[0]:
-                    print (f"La promoción seleccionada es: {promo[3]}")   
+                    print (f"La promoción seleccionada es: {promo[2]}")   
     else:
         print("No se encontró un local con el nombre ingresado.")
         print("Locales disponibles:")

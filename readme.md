@@ -1,6 +1,6 @@
 # TRABAJO FINAL METODOLOGÍA DE LA PROGRAMACIÓN
 
-## El sistema que estamos desarrollando está pensado para los shoppings de la ciudad de Rosario.
+## El sistema que estamos desarrollando está pensado para los shoppings de la ciudad de Rosario
 
 Se utilizará para poder dar de alta, de baja y modificar locales, entre otras funciones detalladas posteriormente. Será utilizado por el administrador del shopping y los dueños de los locales. Ademas, lo podran utilizar los clientes de dichos locales para poder buscar descuentos, y aplicarlos a sus compras.
 

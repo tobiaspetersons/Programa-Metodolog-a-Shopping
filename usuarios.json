@@ -16,5 +16,11 @@
         "email": "b",
         "clave": "b",
         "rol": "duenio_local"
+    },
+    {
+        "cod": 4,
+        "email": "moronijoaquin0@gmail.com",
+        "clave": "kkk",
+        "rol": "cliente"
     }
 ]
