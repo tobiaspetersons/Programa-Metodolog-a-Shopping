@@ -1,0 +1,10 @@
+[
+    {
+        "cod": 1,
+        "nombre": "zara",
+        "ubicacion": "a",
+        "rubro": "a",
+        "estado": true,
+        "cod_usuario": 3
+    }
+]

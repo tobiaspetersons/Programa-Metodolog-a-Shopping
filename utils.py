@@ -111,10 +111,12 @@ def validar_nombre(nuevo_nombre: str, lista_nombres: List[str]) -> str:
             
 def ingresar_dato(mensaje:str)->str:
     valor = input(mensaje)
-    while valor == "":
-        print ("Ingrese un valor valido.")
-        valor = input(mensaje)
-        return valor
+    while True:
+        if valor == "":
+            print ("Ingrese un valor valido.")
+            valor = input(mensaje)
+        else:
+            return valor
     
 def ingresar_dato_modificado(mensaje:str, lista:list, key:str)->str:
     valor = input(mensaje)

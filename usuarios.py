@@ -52,7 +52,7 @@ def registrar_cliente():
     mensaje = (f"Gracias por registrarte. Tu código de confirmación es: {codigo_confirmacion}")
     enviar_correo(destinatario=correo,asunto=asunto,mensaje=mensaje)
     while True:
-        codigo_confirmacion_ingresado = input("Ingrese el código de confirmación que le enviamos a su correo.")
+        codigo_confirmacion_ingresado = input("Ingrese el código de confirmación que le enviamos a su correo: ")
         if codigo_confirmacion_ingresado == codigo_confirmacion:
             nuevo_usuario = {
             'cod': codigo_cliente + 1,

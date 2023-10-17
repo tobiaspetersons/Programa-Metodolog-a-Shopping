@@ -1,0 +1,23 @@
+[
+    {
+        "cod": 1,
+        "nombre": "HHH",
+        "descripcion": "hhh",
+        "fecha_inicio": "2023-10-17",
+        "fecha_fin": "2023-10-19",
+        "dia_semana": 1,
+        "cod_local": 1,
+        "estado": "Activa"
+    },
+    {
+        "cod": 2,
+        "nombre": "kkkkkk",
+        "descripcion": "jjdjjdjd",
+        "fecha_inicio": "2023-10-17",
+        "fecha_fin": "2023-10-19",
+        "dia_semana": 1,
+        "cod_local": 1,
+        "estado": "Activa",
+        "pendiente_aprobacion": false
+    }
+]

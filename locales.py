@@ -133,38 +133,35 @@ def modificar_local():
 def eliminar_local():
     clear_screen()
     codigo_local = int(input("Ingrese el codigo de local que quiera eliminar (0 para cancelar): "))
-    while True:
-        if codigo_local == "0":
-            clear_screen()
-            break
-        else:
-            local_encontrado = []
-            codigo_duenio = None
-            for local in LOCALES:
-                if local['cod'] == codigo_local:
-                    local_encontrado = local
-                    codigo_duenio = local['cod_usuario']
-                    print(codigo_duenio)
-                    for usuario in USUARIOS:
-                        if usuario['cod'] == codigo_duenio:
-                            duenio_local_encontrado = usuario
-                            print(duenio_local_encontrado)
-                    break
-            if local_encontrado:
-                print(f"El local seleccionado es {local_encontrado['nombre']}")
-                confimacion = input("¿Está seguro que desea eliminar el local seleccionado? (S/N): ")
-                if confimacion.lower() == 's':
-                    LOCALES.remove(local_encontrado)
-                    USUARIOS.remove(duenio_local_encontrado)
-                    guardar_archivo(nombre_archivo=NOMBRE_ARCHIVO_LOCALES,datos=LOCALES)
-                    guardar_archivo(nombre_archivo=NOMBRE_ARCHIVO_USUARIOS,datos=USUARIOS)
-                    clear_screen()
-                    print(f"El Local {local_encontrado['nombre']} fue eliminado con éxito.")
-                else:
-                    clear_screen()
-                    print("La operacion ha sido cancelada.")
+    if codigo_local == "0":
+        clear_screen()
+        return
+    else:
+        local_encontrado = []
+        codigo_duenio = None
+        for local in LOCALES:
+            if local['cod'] == codigo_local:
+                local_encontrado = local
+                codigo_duenio = local['cod_usuario']
+                print(codigo_duenio)
+                for usuario in USUARIOS:
+                    if usuario['cod'] == codigo_duenio:
+                        duenio_local_encontrado = usuario
+        if local_encontrado:
+            print(f"El local seleccionado es {local_encontrado['nombre']}")
+            confimacion = input("¿Está seguro que desea eliminar el local seleccionado? (S/N): ")
+            if confimacion.lower() == 's':
+                LOCALES.remove(local_encontrado)
+                USUARIOS.remove(duenio_local_encontrado)
+                guardar_archivo(nombre_archivo=NOMBRE_ARCHIVO_LOCALES,datos=LOCALES)
+                guardar_archivo(nombre_archivo=NOMBRE_ARCHIVO_USUARIOS,datos=USUARIOS)
+                clear_screen()
+                print(f"El Local {local_encontrado['nombre']} fue eliminado con éxito.")
             else:
-                print("No se ha encontrado el local seleccionado.")
+                clear_screen()
+                print("La operacion ha sido cancelada.")
+        else:
+            print("No se ha encontrado el local seleccionado.")
             
 def lista_locales():
     clear_screen()

@@ -4,5 +4,17 @@
         "email": "a",
         "clave": "a",
         "rol": "admin"
+    },
+    {
+        "cod": 2,
+        "email": "c",
+        "clave": "c",
+        "rol": "cliente"
+    },
+    {
+        "cod": 3,
+        "email": "b",
+        "clave": "b",
+        "rol": "duenio_local"
     }
 ]
