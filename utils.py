@@ -2,12 +2,17 @@ import re
 import os
 from datetime import datetime, date
 from dateutil import parser
-import random 
+from random import random, randint
 import string 
+import qrcode
+import tempfile
+from PIL import Image, ImageTk
+import tkinter as tk
 from typing import List
 import smtplib #mail
+from tabulate import tabulate
 from manejo_archivos import guardar_archivo
-from variables_globales import NOMBRE_ACHIVO_PROMOCIONES, LOCALES, PROMOCIONES
+from variables_globales import NOMBRE_ACHIVO_PROMOCIONES, LOCALES, PROMOCIONES, USO_PROMOCIONES, NOMBRE_ARCHIVO_USO_PROMOCIONES, USUARIOS
 
 
 def buscar_cod_maximo(archivo, key='cod'):
@@ -28,6 +33,12 @@ def codigo_local_desc(usuario_encontrado:list):
         if usuario_encontrado['cod'] == local['cod_usuario']:
             codigo_local = local['cod']
             return codigo_local
+        
+def codigo_cliente(usuario_encontrado:list):
+    for usuario in USUARIOS:
+        if usuario_encontrado['cod'] == usuario['cod']:
+            codigo_cliente = usuario['cod']
+            return codigo_cliente
         
 def nombre_a_codigo(input_nombre):
     for local in LOCALES:
@@ -194,3 +205,35 @@ def enviar_correo(destinatario, asunto, mensaje):
         print("Correo enviado exitosamente.")
     except Exception as e:
         print(f"Error al enviar el correo: {str(e)}")
+        
+def mostrar_tabla(data, headers):
+    table = tabulate(data, headers, tablefmt="fancy_grid")
+    print(table)
+
+# Generar el código QR para una promoción
+def generar_codigo_qr(promocion:list,usuario_encontrado:list):
+    nro_random = f"123{randint(0, 9999999):03}"
+    codigo_qr = f"{promocion['nombre']}-{promocion['cod']}-{promocion['cod_local']}-{nro_random}"
+    fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    cod_cliente = codigo_cliente(usuario_encontrado=usuario_encontrado)
+    img = qrcode.make(codigo_qr)
+    with tempfile.NamedTemporaryFile(delete=False) as f:
+        img.save(f.name, format='PNG')
+        root = tk.Tk()
+        root.title("Código QR")
+        img = ImageTk.PhotoImage(Image.open(f.name))
+        label = tk.Label(root, image=img)
+        label.pack()
+        root.mainloop()
+    uso_promocion = {
+        'nombre': promocion['nombre'],
+        'cod_local' : promocion['cod_local'],
+        'cod_cliente' : cod_cliente,
+        'fecha_hora': fecha_hora,
+        'codigo_utilizado': f"{promocion['nombre']}-{promocion['cod']}-{promocion['cod_local']}-{nro_random}"
+        
+    }
+    USO_PROMOCIONES.append(uso_promocion)
+    guardar_archivo(nombre_archivo=NOMBRE_ARCHIVO_USO_PROMOCIONES, datos=USO_PROMOCIONES)
+        
+

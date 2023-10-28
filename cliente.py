@@ -1,6 +1,6 @@
 from promociones import usar_promociones_cliente
 from utils import clear_screen
-def menu_cliente():
+def menu_cliente(usuario_encontrado:list):
     while True:
         clear_screen()
         print("1. Buscar descuentos en local")
@@ -8,7 +8,7 @@ def menu_cliente():
         print("0. Salir")
         opcion_cliente = input("Seleccione una opcion (1/2/0): ")
         if opcion_cliente == "1":
-            usar_promociones_cliente()
+            usar_promociones_cliente(usuario_encontrado=usuario_encontrado)
         elif opcion_cliente == "0":
             clear_screen()
             print("¡Hasta luego!")

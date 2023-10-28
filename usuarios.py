@@ -19,7 +19,7 @@ def iniciar_sesion():
         elif usuario_encontrado['rol'] == "duenio_local":
             menu_duenio(usuario_encontrado=usuario_encontrado)
         elif usuario_encontrado['rol'] == "cliente":
-            menu_cliente()
+            menu_cliente(usuario_encontrado=usuario_encontrado)
     else:
         clear_screen()
         print("No existe ese usuario o contraseña")

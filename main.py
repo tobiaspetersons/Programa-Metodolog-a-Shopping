@@ -30,6 +30,5 @@ def main():
             clear_screen()
             print("Opción no válida. Por favor, seleccione 1, 2 o 3.")
         
-         
 if __name__ == "__main__":
     main() 

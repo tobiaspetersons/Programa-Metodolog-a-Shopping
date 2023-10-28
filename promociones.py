@@ -1,7 +1,10 @@
-from utils import buscar_cod_maximo, codigo_local_desc, clear_screen, codigo_a_nombre, ingresar_fecha, ingresar_dato, obtener_dia_semana, ingresar_dato_modificado
 from datetime import datetime, date
+import qrcode
+from random import random
+from tabulate import tabulate
+from utils import buscar_cod_maximo, codigo_local_desc, clear_screen, codigo_a_nombre, ingresar_fecha, ingresar_dato, obtener_dia_semana, ingresar_dato_modificado, generar_codigo_qr
 from manejo_archivos import guardar_archivo
-from variables_globales import NOMBRE_ACHIVO_PROMOCIONES, PROMOCIONES, LOCALES
+from variables_globales import NOMBRE_ACHIVO_PROMOCIONES, PROMOCIONES, LOCALES, USO_PROMOCIONES
 
 
 def gestion_promociones(usuario_encontrado:list):
@@ -226,20 +229,22 @@ def reporte_promociones_usadas():
         pass
     
 #FUNCION BUSCAR DESCUENTOS DE LOCALES
-def usar_promociones_cliente():
+def usar_promociones_cliente(usuario_encontrado:list):
     fecha_dia = date.today()
     dia_semana = fecha_dia.weekday()
     nombre_local = input("Ingrese el nombre del local para ver sus promociones (ingrese '0' para volver al menú): ").strip().lower()
     if nombre_local == '0':
         return
-    
-    codigo_local = 0
+
+    codigo_local = None
     for local in LOCALES:
-        if nombre_local == local['nombre'].lower():
+        if (nombre_local in str(local['nombre']).split()
+            or nombre_local == local['nombre']
+        ):
             codigo_local = local['cod']
             break
-        
-    if codigo_local != 0:
+
+    if codigo_local != None:
         i = 1
         promociones_disponibles = []
         for promo in PROMOCIONES:
@@ -247,7 +252,7 @@ def usar_promociones_cliente():
             fecha_fin = promo['fecha_fin']
             if (
                 codigo_local == promo['cod_local']
-                and promo['estado'] == "Activa" 
+                and promo['estado'] == "Activa"
                 and date.today() >= datetime.strptime(fecha_inicio, "%Y-%m-%d").date()
                 and date.today() <= datetime.strptime(fecha_fin, "%Y-%m-%d").date()
                 and dia_semana == promo['dia_semana']
@@ -256,22 +261,27 @@ def usar_promociones_cliente():
                 print(f"Nombre de la promoción: {promo['nombre']}")
                 print(f"Descripción de la promoción: {promo['descripcion']}")
                 promociones_disponibles.append([i, promo['cod'], promo['nombre']])
-                i += 1
                 
-        if i == 1:
-            print("No hay promociones disponibles en el día de hoy para este local.")
-        else:
-            promocion = int(input("Ingrese el número de promoción que desea aplicar a su compra: "))
+                i += 1
+    
+        if i != 1:
+            promocion_seleccionada = int(input("Ingrese el número de promoción que desea aplicar a su compra: "))
             for promo in promociones_disponibles:
-                if promocion == promo[0]:
-                    print (f"La promoción seleccionada es: {promo[2]}")   
+                if promocion_seleccionada == promo[0]:
+                    print(f"La promoción seleccionada es: {promo[2]}")
+                    cod_promo_seleccionada = promo[0]
+                    for promocion in PROMOCIONES:
+                        if promocion['cod'] == cod_promo_seleccionada:
+                            generar_codigo_qr(promocion=promocion, usuario_encontrado=usuario_encontrado)
+                else:
+                   input("Número de promoción no válido. Presione una tecla para volver al menú.")
+        else:
+            print("No hay promociones disponibles en el día de hoy para este local.")
+            input("Presione una tecla para volver al menú.")
+               
     else:
         print("No se encontró un local con el nombre ingresado.")
         print("Locales disponibles:")
         for local in LOCALES:
             print(f"Código: {local['cod']}, Nombre: {local['nombre']}")
-            
 
-    
-            
-            
