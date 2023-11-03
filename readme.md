@@ -71,10 +71,12 @@ MENU DE ADMINISTRADOR:
     a) Crear Locales
     b) Modificar Local
     c) Eliminar Local
+    d) Control de locales activos
     d) Volver
-2. Crear cuentas de dueños de locales
-3. Aprobar / Denegar solicitud de descuento
-4. Reporte de utilización de descuentos
+2. Aprobar / Denegar solicitud de descuento
+3. Listado de utilización de descuentos
+4. Listado de locales
+5. Listado de usuarios
 0. Salir
 ```
 
@@ -86,7 +88,7 @@ MENU PARA DUEÑO DE LOCAL:
     b) Modificar descuento de mi local
     c) Eliminar descuento de mi local
     d) Volver
-2. Reporte de utilización de descuentos
+2. Listado de utilización de descuentos del local
 0. Salir
 ```
 
@@ -96,5 +98,3 @@ MENU PARA CLIENTE
 1. Buscar/solicitar descuentos
 0. Salir
 ```
-
-instalar dateutil.
