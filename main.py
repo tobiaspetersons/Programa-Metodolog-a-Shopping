@@ -12,16 +12,16 @@ def main():
         print("Menú Principal:")
         print("1. Ingresar con email registrado")
         print("2. Registrarse como cliente")
-        print("3. Salir")
+        print("0. Salir")
         print("----------------------------------------------")
-        opcion = input("Seleccione una opción (1/2/3): ")
+        opcion = input("Seleccione una opción (1/2/0): ")
         if opcion == "1":
             clear_screen()
             iniciar_sesion()
         elif opcion == "2":
             clear_screen()
             registrar()
-        elif opcion == "3":
+        elif opcion == "0":
             clear_screen()
             print("¡Hasta luego!")
             break

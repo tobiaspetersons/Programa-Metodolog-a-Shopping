@@ -1,0 +1,42 @@
+[
+    {
+        "cod": 1,
+        "nombre": "mora pussey",
+        "ubicacion": "pussey mora",
+        "rubro": "jola",
+        "estado": true,
+        "cod_usuario": 2
+    },
+    {
+        "cod": 2,
+        "nombre": "Lola",
+        "ubicacion": "Zona este",
+        "rubro": "Hola",
+        "estado": true,
+        "cod_usuario": 3
+    },
+    {
+        "cod": 3,
+        "nombre": "Kiki",
+        "ubicacion": "hola",
+        "rubro": "gola",
+        "estado": true,
+        "cod_usuario": 4
+    },
+    {
+        "cod": 4,
+        "nombre": "Juli",
+        "ubicacion": "juju",
+        "rubro": "juju",
+        "estado": true,
+        "cod_usuario": 5
+    },
+    {
+        "cod": 5,
+        "nombre": "Julido",
+        "ubicacion": "JUJU",
+        "rubro": "jola",
+        "estado": true,
+        "cod_usuario": 6
+    }
+]

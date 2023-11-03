@@ -1,0 +1,51 @@
+[
+    {
+        "nombre": "Mora",
+        "cod_local": 1,
+        "cod_cliente": 7,
+        "fecha_hora": "02-11-2023 22:43:21",
+        "codigo_utilizado": "Mora-3-1-1232513145"
+    },
+    {
+        "nombre": "Mora",
+        "cod_local": 1,
+        "cod_cliente": 7,
+        "fecha_hora": "02-11-2023 23:01:11",
+        "codigo_utilizado": "Mora-3-1-123166505"
+    },
+    {
+        "nombre": "Mora",
+        "cod_local": 1,
+        "cod_cliente": 7,
+        "fecha_hora": "02-11-2023 23:02:56",
+        "codigo_utilizado": "Mora-3-1-1237609310"
+    },
+    {
+        "nombre": "Mora",
+        "cod_local": 1,
+        "cod_cliente": 8,
+        "fecha_hora": "02-11-2023 23:16:23",
+        "codigo_utilizado": "Mora-3-1-123876605"
+    },
+    {
+        "nombre": "JuliDo",
+        "cod_local": 5,
+        "cod_cliente": 8,
+        "fecha_hora": "02-11-2023 23:20:17",
+        "codigo_utilizado": "JuliDo-2-5-1232171759"
+    },
+    {
+        "nombre": "Mora",
+        "cod_local": 1,
+        "cod_cliente": 7,
+        "fecha_hora": "02-11-2023 23:41:29",
+        "codigo_utilizado": "Mora-3-1-1235030197"
+    },
+    {
+        "nombre": "Mora",
+        "cod_local": 1,
+        "cod_cliente": 7,
+        "fecha_hora": "02-11-2023 23:42:02",
+        "codigo_utilizado": "Mora-3-1-123646458"
+    }
+]

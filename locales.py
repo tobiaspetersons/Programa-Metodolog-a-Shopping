@@ -45,8 +45,8 @@ def crear_local():
             rubro_nuevo_local = ingresar_dato(mensaje='Ingrese el rubro del nuevo local: ')
             nombre_nuevo_duenio = ingresar_dato("Ingrese el nombre del dueño del local: ")
             apellido_nuevo_duenio = ingresar_dato("Ingrese el apellido del dueño del local: ")
-            email_nuevo_duenio = f"{nombre_nuevo_local}+@shopping.com"
-            clave_nuevo_duenio = f"{nombre_nuevo_local}+123"
+            email_nuevo_duenio = f"{nombre_nuevo_local.lower()}@shopping.com"
+            clave_nuevo_duenio = f"{nombre_nuevo_local}12345"
             dni_nuevo_duenio = ingresar_num_formato(mensaje='Ingrese el DNI del dueño del local: ',
                                                     cant=8,
                                                     mensaje_error='Formato no válido. Intente nuevamente.'
@@ -143,7 +143,7 @@ def modificar_local():
                             clear_screen()
                             break
                         elif verificacion == "n":
-                            menu_gestion_locales()
+                            return
                         else:
                             print('Ingrese "S" para sí o "N" para no.')
             else:

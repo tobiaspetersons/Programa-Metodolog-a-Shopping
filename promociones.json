@@ -1,0 +1,35 @@
+[
+    {
+        "cod": 1,
+        "nombre": "Juli",
+        "descripcion": "Juli 50%",
+        "fecha_inicio": "02-11-2023",
+        "fecha_fin": "05-11-2023",
+        "dia_semana": 3,
+        "cod_local": 5,
+        "estado": "Activa",
+        "pendiente_aprobacion": false
+    },
+    {
+        "cod": 2,
+        "nombre": "JuliDo",
+        "descripcion": "juli 5050%",
+        "fecha_inicio": "02-11-2023",
+        "fecha_fin": "07-11-2023",
+        "dia_semana": 3,
+        "cod_local": 5,
+        "estado": "Activa",
+        "pendiente_aprobacion": false
+    },
+    {
+        "cod": 3,
+        "nombre": "Mora",
+        "descripcion": "Mora 50%",
+        "fecha_inicio": "02-11-2023",
+        "fecha_fin": "05-11-2023",
+        "dia_semana": 3,
+        "cod_local": 1,
+        "estado": "Activa",
+        "pendiente_aprobacion": false
+    }
+]

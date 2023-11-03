@@ -8,5 +8,75 @@
         "rol": "admin",
         "dni": 46537649,
         "telefono": 3416824650
+    },
+    {
+        "cod": 2,
+        "nombre": "Mora",
+        "apellido": "Fuentes",
+        "email": "mora@shopping.com",
+        "clave": "Mora123",
+        "rol": "duenio_local",
+        "dni": 46537666,
+        "telefono": 3419890989
+    },
+    {
+        "cod": 3,
+        "nombre": "Lola",
+        "apellido": "Morra",
+        "email": "lola@shopping.com",
+        "clave": "Lola12345",
+        "rol": "duenio_local",
+        "dni": 46537666,
+        "telefono": 3416787678
+    },
+    {
+        "cod": 4,
+        "nombre": "Kiki",
+        "apellido": "Lola",
+        "email": "kiki@shopping.com",
+        "clave": "Kiki12345",
+        "rol": "duenio_local",
+        "dni": 45464748,
+        "telefono": 3415273944
+    },
+    {
+        "cod": 5,
+        "nombre": "Juli",
+        "apellido": "Do",
+        "email": "juli@shopping.com",
+        "clave": "Juli12345",
+        "rol": "duenio_local",
+        "dni": 46545654,
+        "telefono": 3416666666
+    },
+    {
+        "cod": 6,
+        "nombre": "Julido",
+        "apellido": "do",
+        "email": "julido@shopping.com",
+        "clave": "Julido12345",
+        "rol": "duenio_local",
+        "dni": 46547858,
+        "telefono": 3417777777
+    },
+    {
+        "cod": 7,
+        "nombre": "Tobias",
+        "apellido": "Petersons",
+        "email": "c",
+        "clave": "c",
+        "rol": "cliente",
+        "dni": 46537649,
+        "telefono": 3416824650
+    },
+    {
+        "cod": 8,
+        "nombre": "mora",
+        "apellido": "fuentes",
+        "email": "morafuentes953@gmail.com",
+        "clave": "Morafuentes.",
+        "rol": "cliente",
+        "dni": 46537654,
+        "telefono": 3416657748
     }
 ]

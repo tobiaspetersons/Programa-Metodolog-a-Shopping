@@ -11,7 +11,7 @@ def iniciar_sesion():
     clave_input = input("Ingrese su clave: ")
     usuario_encontrado = []
     for usuario in USUARIOS:
-        if usuario['email'] == usuario_input and usuario['clave'] == clave_input:
+        if usuario['email'] == usuario_input.lower() and usuario['clave'] == clave_input:
             usuario_encontrado = usuario
             break
     if usuario_encontrado:
@@ -31,7 +31,7 @@ def registrar(rol='cliente',mensaje_nombre="Ingrese su nombre (0 para cancelar):
         if nombre == "0":
             return
         apellido = ingresar_dato(mensaje="Ingrese su apellido: ")
-        correo = input("Ingrese un email para registrarse: ")
+        correo = input("Ingrese un email para registrarse: ").lower()
         mails_repetidos = []
         for usuario in USUARIOS:
             if correo == usuario['email']:

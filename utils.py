@@ -128,10 +128,10 @@ def validar_dia_semana(dia:str):
         return False
 
 def verificar_vencimiento_promos():
-    fecha_hoy = date.today()
+    fecha_hoy = date.today().strftime('%d-%m-%Y')
     for promo in PROMOCIONES:
         if promo['estado'] == 'Activa':
-            fecha_fin_promo= datetime.strptime(promo['fecha_fin'], "%Y-%m-%d").date()
+            fecha_fin_promo= str(datetime.strptime(promo['fecha_fin'], '%d-%m-%Y').date())
             if fecha_hoy > fecha_fin_promo:
                 promo['estado'] = 'Vencida'
                 guardar_archivo(nombre_archivo=NOMBRE_ACHIVO_PROMOCIONES,datos=PROMOCIONES)

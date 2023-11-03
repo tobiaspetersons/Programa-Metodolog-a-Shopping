@@ -42,13 +42,13 @@ def crear_promociones(usuario_encontrado:list):
             fecha_actual = date.today()
             fecha_maxima = datetime(2030, 12, 31).date()
             fecha_inicio_str = str(ingresar_fecha(
-                mensaje= (f"Ingrese la fecha de inicio de la promocion (en formato DD-MM-YYYY (mínimo {fecha_actual})): "),
+                mensaje= (f"Ingrese la fecha de inicio de la promocion (en formato DD-MM-YYYY (mínimo {fecha_actual.strftime('%d-%m-%Y')})): "),
                 fecha_minima= fecha_actual,
                 fecha_maxima= fecha_maxima
             ))
             fecha_minimo  = datetime.strptime(fecha_inicio_str, '%d-%m-%Y').date()
             fecha_fin_str = str(ingresar_fecha(
-                mensaje= (f"Ingrese la fecha de inicio de la promocion (en formato DD-MM-YYYY (mínimo {fecha_actual})): "),
+                mensaje= (f"Ingrese la fecha de inicio de la promocion (en formato DD-MM-YYYY (mínimo {fecha_actual.strftime('%d-%m-%Y')})): "),
                 fecha_minima= fecha_minimo,
                 fecha_maxima= fecha_maxima
             ))
@@ -132,14 +132,14 @@ def modificar_promociones(usuario_encontrado: list):
             fecha_actual = date.today()
             fecha_maxima = datetime(2030, 12, 31).date()
             promo_encontrada['fecha_inicio'] = str(ingresar_fecha(
-                mensaje= (f"Ingrese la nueva fecha de inicio de la promoción (en formato DD-MM-YYYY (mínimo {fecha_actual})): "),
+                mensaje= (f"Ingrese la nueva fecha de inicio de la promoción (en formato DD-MM-YYYY (mínimo {fecha_actual.strftime('%d-%m-%Y')})): "),
                 fecha_minima= fecha_actual,
                 fecha_maxima= fecha_maxima))
         elif opcion == 4:
             fecha_actual = date.today()
             fecha_maxima = datetime(2030, 12, 31).date()
             promo_encontrada['fecha_fin'] = str(ingresar_fecha(
-                mensaje= (f"Ingrese la nueva fecha de finalización de la promoción (en formato DD-MM-YYYY (mínimo {fecha_actual})): "),
+                mensaje= (f"Ingrese la nueva fecha de finalización de la promoción (en formato DD-MM-YYYY (mínimo {fecha_actual.strftime('%d-%m-%Y')})): "),
                 fecha_minima= fecha_actual,
                 fecha_maxima= fecha_maxima))
         elif opcion == 5:
@@ -228,64 +228,54 @@ def solicitudes_promociones_admin():
             else:
                 print("Opción no válida. La solicitud no se ha modificado.")
         guardar_archivo(nombre_archivo=NOMBRE_ACHIVO_PROMOCIONES, datos=PROMOCIONES)
+        
+def ver_locales():
+    for local in LOCALES:
+            print(f"Código: {local['cod']}, Nombre: {local['nombre']}")
 
-    
-#FUNCION BUSCAR DESCUENTOS DE LOCALES
 def usar_promociones_cliente(usuario_encontrado:list):
     fecha_dia = date.today()
     dia_semana = fecha_dia.weekday()
-    nombre_local = input("Ingrese el nombre del local para ver sus promociones (ingrese '0' para volver al menú): ").strip().lower()
-    if nombre_local == '0':
-        return
-    codigo_local = None
     for local in LOCALES:
-        if (nombre_local in str(local['nombre']).split()
-            or nombre_local == local['nombre']
-        ):
-            codigo_local = local['cod']
-            break
-
-    if codigo_local != None:
-        i = 1
-        promociones_disponibles = []
-        for promo in PROMOCIONES:
-            fecha_inicio = promo['fecha_inicio']
-            fecha_fin = promo['fecha_fin']
-            if (
-                codigo_local == promo['cod_local']
-                and promo['estado'] == "Activa"
-                and date.today() >= datetime.strptime(fecha_inicio, "%Y-%m-%d").date()
-                and date.today() <= datetime.strptime(fecha_fin, "%Y-%m-%d").date()
-                and dia_semana == promo['dia_semana']
-            ):
-                print(f"Promoción número {i}: ")
-                print(f"Nombre de la promoción: {promo['nombre']}")
-                print(f"Descripción de la promoción: {promo['descripcion']}")
-                promociones_disponibles.append([i, promo['cod'], promo['nombre']])
-                
-                i += 1
-    
-        if i != 1:
-            promocion_seleccionada = input_number(message="Ingrese el número de promoción que desea aplicar a su compra: ",
-                                error_message="El valor ingresado no es valido",
-                                integer=True
+        print(f"Código: {local['cod']}, Nombre: {local['nombre']}")
+    codigo_local = input_number(message="Ingrese el código de local que desea aplicar una promoción: ",
+                                error_message= "El valor ingresado no es válido.",
+                                integer= True
                                 )
-            for promo in promociones_disponibles:
-                if promocion_seleccionada == promo[0]:
-                    print(f"La promoción seleccionada es: {promo[2]}")
-                    nombre_promocion = promo[2]
-                    for promocion in PROMOCIONES:
-                        if promocion['nombre'] == nombre_promocion:
-                            generar_codigo_qr(promocion=promocion, usuario_encontrado=usuario_encontrado)
-                else:
-                   input("Número de promoción no válido. Presione una tecla para volver al menú.")
-        else:
-            print("No hay promociones disponibles en el día de hoy para este local.")
-            input("Presione una tecla para volver al menú.")
-               
-    else:
-        print("No se encontró un local con el nombre ingresado.")
-        print("Locales disponibles:")
-        for local in LOCALES:
-            print(f"Código: {local['cod']}, Nombre: {local['nombre']}")
+    i = 1
+    promociones_disponibles = []
+    for promo in PROMOCIONES:
+        fecha_inicio = promo['fecha_inicio']
+        fecha_fin = promo['fecha_fin']
+        if (
+            codigo_local == promo['cod_local']
+            and promo['estado'] == "Activa"
+            and date.today() >= datetime.strptime(fecha_inicio, '%d-%m-%Y').date()
+            and date.today() <= datetime.strptime(fecha_fin, '%d-%m-%Y').date()
+            and dia_semana == promo['dia_semana']
+        ):
+            print(f"Promoción número {i}: ")
+            print(f"Nombre de la promoción: {promo['nombre']}")
+            print(f"Descripción de la promoción: {promo['descripcion']}")
+            promociones_disponibles.append([i, promo['cod'], promo['nombre']])
+            
+            i += 1
 
+    if i != 1:
+        promocion_seleccionada = input_number(message="Ingrese el número de promoción que desea aplicar a su compra: ",
+                            error_message="El valor ingresado no es valido",
+                            integer=True
+                            )
+        for promo in promociones_disponibles:
+            if promocion_seleccionada == promo[0]:
+                print(f"La promoción seleccionada es: {promo[2]}")
+                nombre_promocion = promo[2]
+                for promocion in PROMOCIONES:
+                    if promocion['nombre'] == nombre_promocion:
+                        generar_codigo_qr(promocion=promocion, usuario_encontrado=usuario_encontrado)
+            else:
+               input("Número de promoción no válido. Presione una tecla para volver al menú.")
+    else:
+        print("No hay promociones disponibles en el día de hoy para este local.")
+        input("Presione una tecla para volver al menú.")
+        
