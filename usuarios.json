@@ -1,44 +1,12 @@
 [
     {
         "cod": 1,
+        "nombre": "Tobias",
+        "apellido": "Petersons",
         "email": "a",
         "clave": "a",
-        "rol": "admin"
-    },
-    {
-        "cod": 2,
-        "email": "c",
-        "clave": "c",
-        "rol": "cliente"
-    },
-    {
-        "cod": 3,
-        "email": "b",
-        "clave": "b",
-        "rol": "duenio_local"
-    },
-    {
-        "cod": 4,
-        "email": "moronijoaquin0@gmail.com",
-        "clave": "kkk",
-        "rol": "cliente"
-    },
-    {
-        "cod": 5,
-        "email": "tobi@shop.com",
-        "clave": "kkkk",
-        "rol": "duenio_local"
-    },
-    {
-        "cod": 6,
-        "email": "tomasborghi13@gmail.com",
-        "clave": "1234",
-        "rol": "cliente"
-    },
-    {
-        "cod": 7,
-        "email": "gruboye@gmail.com",
-        "clave": "123",
-        "rol": "cliente"
+        "rol": "admin",
+        "dni": 46537649,
+        "telefono": 3416824650
     }
 ]

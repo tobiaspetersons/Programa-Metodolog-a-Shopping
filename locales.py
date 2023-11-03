@@ -1,4 +1,4 @@
-from utils import buscar_cod_maximo, validar_correo,clear_screen, ingresar_dato, ingresar_dato_modificado, ingresar_correo
+from utils import buscar_cod_maximo,clear_screen, ingresar_dato, ingresar_dato_modificado, ingresar_num_formato, input_number
 from manejo_archivos import guardar_archivo
 from variables_globales import NOMBRE_ARCHIVO_USUARIOS, NOMBRE_ARCHIVO_LOCALES, LOCALES, USUARIOS
 
@@ -34,20 +34,27 @@ def crear_local():
     codigo_duenio = buscar_cod_maximo(USUARIOS)
 
     while True:
-        nombre_nuevo_local = input('Ingrese el nombre del nuevo local (0 para cancelar): ')
+        nombre_nuevo_local = ingresar_dato("Ingrese el nombre del nuevo local (0 para cancelar): ")
         if nombre_nuevo_local == "0":
             clear_screen()
             return
-        if nombre_nuevo_local == "":
-            print("Ingrese un valor válido.")
         elif any(local['nombre'] == nombre_nuevo_local for local in LOCALES):
-            print('El nombre de promoción ingresado ya existe.')
+            print('El nombre de local ingresado ya existe.')
         else:
             ubicacion_nuevo_local = ingresar_dato(mensaje='Ingrese la ubicación del nuevo local: ')
             rubro_nuevo_local = ingresar_dato(mensaje='Ingrese el rubro del nuevo local: ')
-            email_nuevo_duenio = ingresar_correo()
-            clave_nuevo_duenio = ingresar_dato(mensaje="Ingrese la contraseña del dueño: ")
-
+            nombre_nuevo_duenio = ingresar_dato("Ingrese el nombre del dueño del local: ")
+            apellido_nuevo_duenio = ingresar_dato("Ingrese el apellido del dueño del local: ")
+            email_nuevo_duenio = f"{nombre_nuevo_local}+@shopping.com"
+            clave_nuevo_duenio = f"{nombre_nuevo_local}+123"
+            dni_nuevo_duenio = ingresar_num_formato(mensaje='Ingrese el DNI del dueño del local: ',
+                                                    cant=8,
+                                                    mensaje_error='Formato no válido. Intente nuevamente.'
+                                                    )
+            telefono_nuevo_duenio = ingresar_num_formato(mensaje='Ingrese el número de teléfono del dueño del local: ',
+                                                         cant=10,
+                                                         mensaje_error='Formato no válido. Intente nuevamente'
+                                                         )           
             nuevo_local = {
                 'cod': codigo_local + 1,
                 'nombre': nombre_nuevo_local,
@@ -57,9 +64,13 @@ def crear_local():
             }
             nuevo_dueño = {
                 'cod': codigo_duenio + 1,
+                'nombre': nombre_nuevo_duenio,
+                'apellido': apellido_nuevo_duenio,
                 'email': email_nuevo_duenio,
                 'clave': clave_nuevo_duenio,
-                'rol': 'duenio_local'
+                'rol': 'duenio_local',
+                'dni': dni_nuevo_duenio,
+                'telefono': telefono_nuevo_duenio
             }
             nuevo_local['cod_usuario'] = nuevo_dueño['cod']
             LOCALES.append(nuevo_local)
@@ -77,7 +88,10 @@ def modificar_local():
     print("Locales disponibles:")
     for local in LOCALES:
         print(f"Código: {local['cod']}, Nombre: {local['nombre']}")
-    codigo_local = int(input("Ingrese el codigo de local que quiera modificar (0 para cancelar): "))
+    codigo_local = input_number(message="Ingrese el codigo de local que quiera modificar (0 para cancelar): ",
+                                error_message="El valor ingresado no es valido",
+                                integer=True
+                                )
     while True:
         if codigo_local == 0:
             clear_screen()
@@ -97,13 +111,22 @@ def modificar_local():
                     print("3. Modificar rubro")
                     print("4. Cambiar estado (Activo/Inactivo)")
                     print ('--------------------------------------')
-                    opcion = int(input("Seleccione una opción (1/2/3/4): "))
+                    opcion = input_number(message="Seleccione una opción (1/2/3/4): ",
+                                error_message="El valor ingresado no es valido. ",
+                                integer=True
+                                )
                     if opcion == 1:
-                        local_encontrado['nombre'] = ingresar_dato_modificado(mensaje=("Ingrese el nuevo nombre del local: "),lista=local_encontrado,key=('nombre'))
+                        local_encontrado['nombre'] = ingresar_dato_modificado(mensaje=("Ingrese el nuevo nombre del local: "),
+                                                                              lista=local_encontrado,
+                                                                              key=('nombre'))
                     elif opcion == 2:
-                        local_encontrado['ubicacion'] = ingresar_dato_modificado(mensaje=('Ingrese la nueva ubicación del local: '),lista=local_encontrado,key=('ubicacion'))
+                        local_encontrado['ubicacion'] = ingresar_dato_modificado(mensaje=('Ingrese la nueva ubicación del local: '),
+                                                                                 lista=local_encontrado,
+                                                                                 key=('ubicacion'))
                     elif opcion == 3:
-                        local_encontrado['rubro'] = ingresar_dato_modificado(mensaje=("Ingrese el nuevo rubro del local: "),lista=local_encontrado,key=('rubro'))
+                        local_encontrado['rubro'] = ingresar_dato_modificado(mensaje=("Ingrese el nuevo rubro del local: "),
+                                                                             lista=local_encontrado,
+                                                                             key=('rubro'))
                     elif opcion == 4:
                         nuevo_estado = not local_encontrado['estado']  
                         local_encontrado['estado'] = nuevo_estado
@@ -132,7 +155,10 @@ def modificar_local():
                 
 def eliminar_local():
     clear_screen()
-    codigo_local = int(input("Ingrese el codigo de local que quiera eliminar (0 para cancelar): "))
+    codigo_local = input_number(message="Ingrese el codigo de local que quiera eliminar (0 para cancelar): ",
+                                error_message="El valor ingresado no es valido.",
+                                integer=True
+                                )
     if codigo_local == "0":
         clear_screen()
         return
@@ -165,13 +191,17 @@ def eliminar_local():
             
 def lista_locales():
     clear_screen()
-    print("-------------------------------------------------------------")
-    print("Locales disponibles:")
-    print("-------------------------------------------------------------")
-    for local in LOCALES:
-        if local['estado'] == True:
-            estado = 'Activo'
-        else:
-            estado = 'Inactivo'
-        print(f"Código: {local['cod']}, Nombre: {local['nombre']}, Ubicacion: {local['ubicacion']}, Estado: {estado}")
-    print("-------------------------------------------------------------")
+    if LOCALES == []:
+        input("No hay locales disponibles. Presione una tecla para volver al menú.")
+        clear_screen()
+        
+    else:
+        print("Locales disponibles:")
+        print("-------------------------------------------------------------")
+        for local in LOCALES:
+            if local['estado'] == True:
+                estado = 'Activo'
+            else:
+                estado = 'Inactivo'
+            print(f"Código: {local['cod']}, Nombre: {local['nombre']}, Ubicacion: {local['ubicacion']}, Estado: {estado}")
+        print("-------------------------------------------------------------")

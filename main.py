@@ -1,13 +1,12 @@
-from usuarios import iniciar_sesion, registrar_cliente
+from usuarios import iniciar_sesion, registrar
 from variables_globales import USUARIOS
-from administrador import agregar_admin
 from utils import clear_screen, verificar_vencimiento_promos
 
 def main():
     clear_screen()
     verificar_vencimiento_promos()
     if not any(usuario['rol'] == 'admin' for usuario in USUARIOS):
-        agregar_admin(lista=USUARIOS)
+        registrar(rol='admin',mensaje_nombre="ADMINISTRADOR, Ingrese su nombre: ")
     while True:
         print("----------------------------------------------")
         print("Menú Principal:")
@@ -21,7 +20,7 @@ def main():
             iniciar_sesion()
         elif opcion == "2":
             clear_screen()
-            registrar_cliente()
+            registrar()
         elif opcion == "3":
             clear_screen()
             print("¡Hasta luego!")
